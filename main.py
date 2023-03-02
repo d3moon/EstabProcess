@@ -18,9 +18,9 @@ df.columns = [
     "CNPJ BÁSICO",
     "CNPJ ORDEM",
     "CNPJ DV",
-    "Nome Fantasia",
+    "Nome",
     "DDD",
-    "TELEFONE",
+    "Telefone",
     "CEP",
     "Email",
 ]
@@ -30,19 +30,19 @@ def formatar_cnpj(cnpj):
     cnpj = str(cnpj).zfill(14)  
     return re.sub(r'(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})', r'\1.\2.\3/\4-\5', cnpj)
 
-df['CNPJ COMPLETO'] = (df['CNPJ BÁSICO'].astype(str)
+df['CNPJ'] = (df['CNPJ BÁSICO'].astype(str)
                        + df['CNPJ ORDEM'].astype(str).str.zfill(4)
                        + df['CNPJ DV'].astype(str))
 
-df['CNPJ COMPLETO'] = df['CNPJ COMPLETO'].apply(formatar_cnpj)
+df['CNPJ'] = df['CNPJ'].apply(formatar_cnpj)
 
 def formatar_telefone(ddd, telefone):
     telefone = re.sub(r'\D', '', telefone) 
     return f'({ddd}) {telefone[:4]}-{telefone[4:]}'
 
-df['TELEFONE'] = df.apply(lambda row: formatar_telefone(str(row['DDD']), str(row['TELEFONE'])), axis=1)
+df['Telefone'] = df.apply(lambda row: formatar_telefone(str(row['DDD']), str(row['Telefone'])), axis=1)
 
-dados = df.loc[:, ["CNPJ COMPLETO", "Nome Fantasia", "TELEFONE", "CEP", "Email"]].to_dict(orient='records')
+dados = df.loc[:, ["CNPJ", "Nome", "Telefone", "CEP", "Email"]].to_dict(orient='records')
 
 client = MongoClient(MONGO_URL)
 db = client['desafio1']
