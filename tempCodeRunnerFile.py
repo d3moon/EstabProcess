@@ -80,10 +80,14 @@ if not es.indices.exists(index=ES_INDEX):
     es.indices.create(index=ES_INDEX, body=index_mapping)
 
 for dado in dados:
+    try:
         dado.pop("_id", None)
         id = str(uuid.uuid4())
         es.index(index=ES_INDEX, id=id, document=dado)
         print(dado)
+    except Exception as e:
+        print(f"Erro ao indexar documento: {dado}. Erro: {e}")
 print(f"Inseridos {len(dados)} documentos no Elasticsearch.")
 
 
+print(f"Inseridos {len(dados)} documentos no Elasticsearch.")
