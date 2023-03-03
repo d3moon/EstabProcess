@@ -20,7 +20,7 @@ Os dados processados devem ser armazenados no MongoDB e no Elasticsearch para fu
 **Instalação via Docker:**
 
 ```bash
-  cd estabprocess
+  cd EstabProcess
   docker-compose build
   docker-compose up
 ```
