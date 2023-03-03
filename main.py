@@ -51,5 +51,22 @@ collection = db['estabelecimentos9']
 collection.insert_many(dados)
 
 es = Elasticsearch(hosts=[os.getenv("ELASTICSEARCH_HOSTS")])
+
+index_mapping = {
+    "mappings": {
+        "properties": {
+            "CNPJ": {"type": "text"},
+            "Nome": {"type": "text"},
+            "Telefone": {"type": "text"},
+            "CEP": {"type": "text"},
+            "Email": {"type": "text"}
+        }
+    }
+}
+
+if not es.indices.exists(index=ES_INDEX):
+    es.indices.create(index=ES_INDEX, body=index_mapping, ignore=400)
+
 for dado in dados:
-    es.index(index=ES_INDEX, body=dado)
+    dado.pop('_id', None)
+    es.index(index=ES_INDEX, document=dado)

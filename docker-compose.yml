@@ -6,8 +6,7 @@ services:
     environment:
       MONGO_URL: mongodb://mongo:27017/
       ES_INDEX: estabelecimentos9
-    ports:
-      - "5000:5000"
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
     depends_on:
       - mongo
       - elasticsearch
