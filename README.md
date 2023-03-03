@@ -28,5 +28,3 @@ Os dados processados devem ser armazenados no MongoDB e no Elasticsearch para fu
 
 - [@João Victor F. Braga](https://www.linkedin.com/in/d3moon)
 
-# EstabProcess
-# EstabProcess
