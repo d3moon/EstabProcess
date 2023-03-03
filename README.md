@@ -11,7 +11,7 @@ Os dados processados devem ser armazenados no MongoDB e no Elasticsearch para fu
 **Instalação local:**
 
 ```bash
-  cd estabprocess
+  cd EstabProcess
   pip install -r requirements.txt
   python main.py
 ```
